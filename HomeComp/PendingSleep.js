@@ -37,7 +37,7 @@ class PendingSleep extends Component{
                     clearTimeout(this.timerHandler);
                 }
                 this.timerHandler = setTimeout(()=>{
-                    this.setOutLatchVal(0,{});
+                    this.setOutLatchVal(0,0);
                     this.setOutLatchVal(1,true);
                     this.timerHandler = null;
                     this.updateOutput();
@@ -49,11 +49,11 @@ class PendingSleep extends Component{
                     this.timerHandler = null;
                 }
                 this.setOutLatchVal(1,false);
-                this.setOutLatchVal(0,{});
+                this.setOutLatchVal(0,0);
             }
             this.last_pin = pin0;
         }else if(pin === 1){
-            this.setOutLatchVal(0,{});
+            this.setOutLatchVal(0,0);
             if(this.timerHandler){
                 clearTimeout(this.timerHandler);
                 this.timerHandler = null;
