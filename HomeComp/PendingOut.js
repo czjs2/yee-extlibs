@@ -61,11 +61,11 @@ class PendingOut extends Component{
                     this.timerHandler = null;
                     this.updateOutput();
                 },timer);
-                this.setOutLatchVal(OUT_PIN.S,{stage1:this.getConfigVal('Stage1Delay'),stage2:this.getConfigVal('Stage2Delay'),uuid:Math.random().toFixed(8)});
+                this.setOutLatchVal(OUT_PIN.S,{stage1:this.getConfigVal('Stage1Delay'),stage2:this.getConfigVal('Stage2Delay')||0,uuid:Math.random().toFixed(8)});
                 this.setOutLatchVal(OUT_PIN.P_S,true);
             }
             this.last_pin = pin0;
-        }else if(pin === 1 && !!this.getInputLatchVal(1)){
+        }else if(pin === 1 && !this.getInputLatchVal(1)){ //reset
             setTimeout(()=>{
                 this.setOutLatchVal(OUT_PIN.S,{});
                 this.setOutLatchVal(OUT_PIN.P_S,false);
@@ -73,7 +73,8 @@ class PendingOut extends Component{
                     clearTimeout(this.timerHandler);
                     this.timerHandler = null;
                 }
-            },20)
+                this.updateOutput();
+            },20); //延时500ms输出，防止输入的脉冲还在
 
 
         }

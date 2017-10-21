@@ -25,9 +25,10 @@ class Alarmer extends Component{
         this.timeHandler = setTimeout(()=>{
             this.setOutLatchVal(1,false);
             this.timeHandler = null;
+            this.updateOutput(0,undefined);
 
         },this.getConfigVal('SoundDelay') || 30000);
-        this.setOutLatchVal(0,this.getConfigVal('midVal') || 2);
+        this.setOutLatchVal(0,this.getConfigVal('midVal') || 1);
         this.setOutLatchVal(1,true);
     }
     stopSound(){
@@ -35,6 +36,7 @@ class Alarmer extends Component{
             clearTimeout(this.timeHandler);
             this.timeHandler = null;
         }
+        this.setOutLatchVal(0,undefined);
         this.setOutLatchVal(1,false);
         this.timeHandler = null;
     }

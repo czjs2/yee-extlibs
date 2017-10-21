@@ -4,6 +4,10 @@
 
 var Component = require('OStars/Core/Base').Component;
 const _ = require('lodash');
+const NotifySound = {
+    STAGE1:26,
+    STAGE2:29
+}
 /**
  *
  * 输入   {} 一个对象
@@ -32,37 +36,42 @@ class SoundMaker extends Component{
 
             let step = Math.ceil(val/(timeout/(this.getConfigVal('interval')||1000)));
             if(step === 0){
-                step = 1;
+                step = 1000;
             }
 
           //  let i = 0;
+
+            this.setOutLatchVal(0,NotifySound.STAGE1);
             this.setOutLatchVal(1,true);
             this.timeHandler = setInterval(()=>{
                 if(val > 0){
                     if(val > stage2){
-                        this.setOutLatchVal(0,1);
-
-
+                        this.setOutLatchVal(0,NotifySound.STAGE1);
                     }else{
-                        this.setOutLatchVal(0,8);
+                        this.setOutLatchVal(0,NotifySound.STAGE2);
                     }
+                    this.updateOutput();
 
                 }else{
                     val = 0;
+                    this.setOutLatchVal(0,undefined);
                     this.setOutLatchVal(1,false);
                    // this.setOutLatchVal(0,0);
                     clearInterval(this.timeHandler);
                     this.timeHandler = null;
                 }
                 val-= step;
-            },1000);
+            },step);
+        }else{
+            this.setOutLatchVal(0,undefined);
+            this.setOutLatchVal(1,false);
         }
     }
     updateLogical(pin){
         if(pin === 0 ){
             let input_val = this.getInputLatchVal(0) ||{};
             if(_.isEmpty(input_val)){
-                //this.setOutLatchVal(0,0);
+                this.setOutLatchVal(0,undefined);
                 this.setOutLatchVal(1,false);
                 this.setupTimer(0)
             }else{
