@@ -41,14 +41,14 @@ class SoundMaker extends Component{
 
           //  let i = 0;
 
-            this.setOutLatchVal(0,NotifySound.STAGE1);
+            this.setOutLatchVal(0,NotifySound.STAGE1+Math.random());
             this.setOutLatchVal(1,true);
             this.timeHandler = setInterval(()=>{
                 if(val > 0){
                     if(val > stage2){
-                        this.setOutLatchVal(0,NotifySound.STAGE1);
+                        this.setOutLatchVal(0,NotifySound.STAGE1+Math.random());
                     }else{
-                        this.setOutLatchVal(0,NotifySound.STAGE2);
+                        this.setOutLatchVal(0,NotifySound.STAGE2+Math.random());
                     }
                     this.updateOutput();
 

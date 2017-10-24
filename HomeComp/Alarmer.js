@@ -28,7 +28,7 @@ class Alarmer extends Component{
             this.updateOutput(0,undefined);
 
         },this.getConfigVal('SoundDelay') || 30000);
-        this.setOutLatchVal(0,this.getConfigVal('midVal') || 1);
+        this.setOutLatchVal(0,(this.getConfigVal('midVal') || 1)+Math.random());
         this.setOutLatchVal(1,true);
     }
     stopSound(){
