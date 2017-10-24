@@ -33,11 +33,11 @@ class DoorOpenAlarm extends Component{
                         if(this.alarmCount > 0){
                             this.setOutLatchVal(1,false);
                             this.updateOutput();
-                            this.setOutLatchVal(0,midVal);
+                            this.setOutLatchVal(0,midVal+Math.random());
                             this.setOutLatchVal(1,true);
                             this.alarmCount-=3;
                         }else{
-                            this.setOutLatchVal(0,midVal);
+                            this.setOutLatchVal(0,midVal+Math.random());
                             this.setOutLatchVal(1,false);
                             clearInterval(this.timeHandler);
                             this.timeHandler = null;
@@ -46,7 +46,7 @@ class DoorOpenAlarm extends Component{
                         this.updateOutput();
 
                     },3000);
-                    this.setOutLatchVal(0,midVal);
+                    this.setOutLatchVal(0,midVal+Math.random());
                     this.setOutLatchVal(1,true);
                 }
             }else{
@@ -56,7 +56,7 @@ class DoorOpenAlarm extends Component{
             let input_val = this.getInputLatchVal(1) ;
             if(input_val !== 'z' && !!input_val) {
                 if(this.timeHandler){
-                    this.setOutLatchVal(0,midVal);
+                    this.setOutLatchVal(0,midVal+Math.random());
                     this.setOutLatchVal(1,false);
                     clearInterval(this.timeHandler);
                     this.timeHandler = null;

@@ -27,12 +27,13 @@ class DoorBell extends Component{
             if(input_val){
                 if(!this.timeHandler){
                     this.timeHandler = setTimeout(()=>{
-                        this.setOutLatchVal(0,10);
+                        this.setOutLatchVal(0,10+Math.random());
                         this.setOutLatchVal(1,false);
                         this.updateOutput();
                         this.timeHandler = null;
                     },4000);
-                    this.setOutLatchVal(0,10);
+
+                    this.setOutLatchVal(0,10+Math.random());
                     this.setOutLatchVal(1,true);
                 }
             }else{
