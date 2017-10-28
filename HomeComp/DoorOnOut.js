@@ -74,10 +74,10 @@ class DoorOnOut extends Component{
             }
             let scene_module = this.getTopScene();
             let cameraId = this.getConfigVal('cameraId');
-            if(cameraId !== undefined) {
+            if(cameraId !== undefined && scene_module.to_conn) {
                 Q().then(function () {
                     //              console.log(JSON.stringify(scene_module.to_conn && scene_module.to_conn[cameraId]));
-                    return async.map((scene_module.to_conn && scene_module.to_conn[cameraId]), function (cameraInfo) {
+                    return async.map(((scene_module.to_conn && scene_module.to_conn[cameraId]))||[], function (cameraInfo) {
                         return this.sendDataToBus(this.URI, 'getDevConfigOfGrpName', {devInfo: cameraInfo}).then(function (devConfig) {
                             return devConfig && (devConfig.deviceSerial + ":" + devConfig.cameraNo);
                         })
